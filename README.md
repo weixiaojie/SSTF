@@ -9,6 +9,7 @@
 
 - 目前支持安卓9-30。
 - 目前测试基于雷电模拟器
+- 支持鼠标点击web中图像，并将坐标实时传递给模拟器
 - 无需安装RethinkDB,CMAke,ZeroMQ等中间件，只需NodeJs环境
 - 已为您编译好所需的bin及so文件，完善STF官网缺失的monitouch示例。
 
@@ -29,6 +30,14 @@ npm i
 nodejs app.js
 
 ```
+
+## 开始体验
+
+- 打开雷电模拟器
+- 打开浏览器访问：http://localhost:9002
+
+<img src="https://github.com/weixiaojie/SSTF/sstf.gif" width="100%">
+
 
 ## 待完善
 
