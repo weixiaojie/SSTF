@@ -37,7 +37,7 @@ nodejs app.js
 - 打开浏览器访问：http://localhost:9002
 
 
-  ![image](sstf.gif)
+  ![image](https://raw.githubusercontent.com/weixiaojie/SSTF/main/sstf.gif)
 
 
 ## 待完善
