@@ -27,7 +27,7 @@
 npm i
 
 # 启动项目
-nodejs app.js
+node app.js
 
 ```
 
