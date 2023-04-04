@@ -1,0 +1,21 @@
+{
+  "name": "csp-stf-console",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.zywa.com.cn/common/z-csp/csp-stf-console.git"
+  },
+  "author": "wxj",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3",
+    "socket.io": "^2.0.3",
+    "ws": "^0.7.1"
+  }
+}

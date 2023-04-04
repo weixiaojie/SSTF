@@ -1,0 +1,1 @@
+基于minitouch和monicap的简易版stf

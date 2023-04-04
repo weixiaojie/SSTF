@@ -1,0 +1,108 @@
+<!doctype html>
+<div align="center" style="margin-top:50px;">
+  <canvas id="canvas" align="center" style="border: 1px solid red;"></canvas>
+</div>
+
+<script>
+  /*jshint browser:true*/
+
+  var BLANK_IMG =
+    'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
+
+  var canvas = document.getElementById('canvas')
+    , g = canvas.getContext('2d')
+
+  var ws = new WebSocket('ws://localhost:9002', 'minicap')
+  ws.binaryType = 'blob'
+
+  ws.onclose = function () {
+    console.log('onclose', arguments)
+  }
+
+  ws.onerror = function () {
+    console.log('onerror', arguments)
+  }
+
+  ws.onmessage = function (message) {
+      console.log(message)
+    var blob = new Blob([message.data], { type: 'image/jpeg' })
+    var URL = window.URL || window.webkitURL
+    var img = new Image()
+    img.onload = function () {
+      //console.log(img.width, img.height)
+      canvas.width = img.width / 2.5
+      canvas.height = img.height / 2.5
+      g.drawImage(img, 0, 0, img.width / 2.5, img.height / 2.5)
+      img.onload = null
+      img.src = BLANK_IMG
+      img = null
+      u = null
+      blob = null
+    }
+    var u = URL.createObjectURL(blob)
+    img.src = u
+  }
+
+  ws.onopen = function () {
+    console.log('onopen', arguments)
+    ws.send('2160x1080/0')
+  }
+
+</script>
+
+
+<script src="http://localhost:3000/socket.io/socket.io.js"></script>
+
+<script>
+  var socket = io("http://localhost:3000");
+</script>
+
+<script>
+  var canvas = document.getElementById("canvas");
+  var down = false;
+  canvas.onmousedown = function (event) {
+    var e = event
+    if (e.originalEvent) {
+      e = e.originalEvent
+    }
+    // Skip secondary click
+    if (e.which === 3) {
+      return
+    }
+    e.preventDefault()
+    down = true;
+    var x = e.pageX - this.offsetLeft
+    var y = e.pageY - this.offsetTop
+    var msg = {
+      x: x / this.offsetWidth,
+      y: y / this.offsetHeight
+    };
+    console.log(msg)
+    socket.emit('touchDown', msg);
+  };
+  canvas.onmouseup = function (event) {
+    down = false;
+    socket.emit('touchUp');
+  };
+  canvas.onmousemove = function (event) {
+    var e = event
+    if (e.originalEvent) {
+      e = e.originalEvent
+    }
+    // Skip secondary click
+    if (e.which === 3) {
+      return
+    }
+    e.preventDefault()
+    if (!down) {
+      return;
+    }
+    var x = e.pageX - this.offsetLeft
+    var y = e.pageY - this.offsetTop
+    var msg = {
+      x: x / this.offsetWidth,
+      y: y / this.offsetHeight
+    };
+    socket.emit('move', msg);
+  };
+</script>
