@@ -36,7 +36,8 @@ nodejs app.js
 - 打开雷电模拟器
 - 打开浏览器访问：http://localhost:9002
 
-<img src="https://github.com/weixiaojie/SSTF/sstf.gif" width="100%">
+
+  ![image](sstf.gif)
 
 
 ## 待完善
